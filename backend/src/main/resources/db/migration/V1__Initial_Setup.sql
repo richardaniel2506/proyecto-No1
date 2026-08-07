@@ -1,0 +1,7 @@
+CREATE TABLE roles (
+    id BIGSERIAL PRIMARY KEY,
+    nombre VARCHAR(20) NOT NULL UNIQUE
+);
+
+INSERT INTO roles (nombre) VALUES ('ROLE_ADMIN');
+INSERT INTO roles (nombre) VALUES ('ROLE_USER');
