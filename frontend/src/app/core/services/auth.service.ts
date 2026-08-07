@@ -5,6 +5,7 @@ import { LoginRequest, LoginResponse, RegisterRequest } from '../models/auth.mod
 import { User } from '../models/user.model';
 import { TokenService } from './token.service';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class AuthService {
   private tokenService = inject(TokenService);
   private router = inject(Router);
   
-  private apiUrl = 'http://localhost:8080/api/auth';
+  private apiUrl = `${environment.apiUrl}/auth`;
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
 
@@ -40,7 +41,7 @@ export class AuthService {
   }
 
   fetchCurrentUser(): Observable<User> {
-    return this.http.get<User>('http://localhost:8080/api/users/me').pipe(
+    return this.http.get<User>(`${environment.apiUrl}/users/me`).pipe(
       tap(user => this.currentUserSubject.next(user))
     );
   }
